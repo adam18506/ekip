@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+            <style>/* =========== Variables y reset corto =========== */
+:root{
+  --bg: #0f100b;
+  --surface: #191a10;
+  --surface-2: #17170f;
+  --text: #eaf2f1;
+  --muted: #faff93;
+  --accent: #fdd34a; /* otro amarillo */
+  --accent-2: #ffd931; /* amarillo */
+
+  --radius: 14px;
+  --shadow: 0 6px 24px rgba(0,0,0,.25);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background: linear-gradient(180deg, #242513, #4e4b05);
+}
+
+/* Imágenes fluidas y enlaces */
+img { max-width: 100%; display: block; height: auto; border-radius: calc(var(--radius) - 6px); }
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Contenedor y secciones */
+.container { width: min(1100px, 92%); margin: 0 auto; }
+.section { padding: 4rem 0; }
+.section.alt { background: radial-gradient(80% 80% at 50% 0%, rgba(25,195,125,.12) 0%, transparent 60%); }
+.section h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); margin: 0 0 .5rem; }
+.section-desc { color: var(--muted); margin: 0 0 2rem; }
+
+/* Skip link accesible */
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: #fff; color: #000; padding: .5rem 1rem; border-radius: 6px;
+}
+.skip-link:focus { left: 1rem; top: 1rem; z-index: 1000; }
+
+/* ======= Header / Nav ======= */
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 0 rgba(219, 216, 49, 0.06);
+}
+.header-inner { display: flex; align-items: center; gap: 1rem; padding: .8rem 0; }
+.brand { display: flex; align-items: center; gap: .6rem; font-weight: 800; letter-spacing: .3px; }
+.logo { width: 28px; height: 28px; }
+.nav { margin-left: auto; display: flex; gap: 1rem; align-items: center; }
+.nav a { padding: .4rem .7rem; border-radius: 8px; }
+.nav a:hover { background: rgba(255,255,255,.08); text-decoration: none; }
+
+/* Botón */
+.btn {
+  display: inline-block;
+  padding: .9rem 1.2rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #00140b;
+  border: 0;
+  border-radius: var(--radius);
+  font-weight: 700;
+  box-shadow: var(--shadow);
+  transition: transform .08s ease-in-out, filter .15s;
+}
+.btn:hover { transform: translateY(-1px); filter: brightness(1.05); text-decoration: none; }
+.btn:active { transform: translateY(0); }
+.btn--ghost {
+  background: transparent; color: var(--text); box-shadow: none;
+  border: 1px solid rgba(255,255,255,.18);
+}
+.btn--small { padding: .5rem .8rem; font-weight: 600; }
+
+/* ======= Hero ======= */
+.hero { padding: 3.2rem 0 2rem; }
+.hero-inner {
+  display: grid; gap: 2rem; align-items: center;
+  grid-template-columns: 1fr;
+}
+.hero-content h1 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.15; margin: 0 0 .6rem;
+}
+.highlight { background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.lead { color: var(--muted); margin-bottom: 1.2rem; }
+.hero-cta { display: flex; gap: .8rem; flex-wrap: wrap; }
+.hero-media img { width: 100%; border: 1px solid rgba(255,255,255,.08); }
+
+/* Desktop hero */
+@media (min-width: 860px) {
+  .hero-inner { grid-template-columns: 1.1fr .9fr; }
+}
+
+/* ======= Grid de tarjetas ======= */
+.grid-cards {
+  display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+.card {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform .08s ease-in-out;
+}
+.card:hover { transform: translateY(-2px); }
+.card-body { padding: 1rem; }
+.card h3 { margin: 0 0 .3rem; font-size: 1.1rem; color: #e8fff5; }
+.card p { margin: 0; color: var(--muted); }
+
+/* ======= Testimonios (Flexbox) ======= */
+.testimonials {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+}
+.quote {
+  flex: 1 1 280px;
+  background: var(--surface-2);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  box-shadow: var(--shadow);
+}
+.quote p { margin: 0 0 .6rem; font-weight: 600; }
+.quote footer { color: var(--muted); }
+
+/* ======= Lista de talleres ======= */
+.feature-list { list-style: none; padding: 0; margin: 0; display: grid; gap: .6rem; }
+.feature-list li {
+  display: flex; align-items: center; gap: .6rem;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.06);
+  padding: .7rem .9rem; border-radius: 12px;
+}
+.feature-emoji { font-size: 1.2rem; }
+
+/* ======= Formulario ======= */
+.form { display: grid; gap: 1rem; max-width: 720px; }
+.form-row { display: grid; gap: .4rem; }
+label { font-weight: 600; }
+input, textarea {
+  background: #2e2e16; color: var(--text);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 10px; padding: .8rem 1rem; font: inherit;
+}
+input::placeholder, textarea::placeholder { color: #8aa1a9; }
+input:focus, textarea:focus, button:focus { outline: 3px solid #2dd4bf; outline-offset: 2px; }
+fieldset { border: 1px dashed rgba(255,255,255,.18); border-radius: 10px; padding: .8rem 1rem; }
+legend { padding: 0 .4rem; color: var(--muted); }
+
+/* ======= Footer ======= */
+.site-footer { padding: 2rem 0; border-top: 1px solid rgba(255,255,255,.07); }
+.footer-inner { display: flex; gap: 1rem; align-items: center; justify-content: space-between; }
+.back-to-top { opacity: .9; }
+.back-to-top:hover { text-decoration: none; opacity: 1; }
+
+
+
+
+
+
+
+
+
+</style>
+        </head>
+        <body>
+            
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comic Con 2025</title>
+  <meta name="description" content="EcoFest: festival de música sostenible. Talleres, foodtrucks eco, artistas locales y más.">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <!-- Tipografía opcional de Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&amp;display=swap" rel="stylesheet">
+
+
+
+  <!-- Enlace para saltar al contenido: accesibilidad -->
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- CABECERA / NAV -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#">
+        <!-- Si no tienes logo.svg, deja el texto -->
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWrqVhpwdPj-9xygSRlZ_HnUQdkuxdGauvUA&amp;s" alt="" class="logo" aria-hidden="true">
+        <span class="brand-text">ComicCon</span>
+      </a>
+
+      <nav class="nav">
+        <a href="#programa">Agenda</a>
+        <a href="#talleres">Talleres</a>
+        <a href="#entradas" class="btn btn--small">Entradas</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <h1>Comic Con  <span class="highlight">Málaga</span></h1>
+        <p class="lead">
+          25–28 de Septiembre, el evento más esperado de todo este año.
+        </p>
+        <div class="hero-cta">
+          <a href="#entradas" class="btn">Comprar entradas</a>
+          <a href="#programa" class="btn btn--ghost">Ver agenda</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <!-- Imagen remota temporal: puedes cambiarla por una local en /img -->
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHJ2Olr2hXa0c227dlQU4hRstBUJmsEvq9_A&amp;s" alt="Comic">
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main id="contenido" class="main">
+    <!-- BLOQUE DESTACOS (Grid) -->
+    <section id="programa" class="section">
+      <div class="container">
+        <h2>Programa y destacados</h2>
+        <p class="section-desc">Tres días de contenido exclusivo, estrenos, invitados y experiencias inolvidables.</p>
+
+        <div class="grid-cards">
+          <article class="card">
+            <img src="https://cdn.oneesports.gg/cdn-data/2024/09/LeagueofLegends_G2Esports_LECSeasonFinals2024_Final2.jpg" alt="Banda tocando en el escenario">
+            <div class="card-body">
+              <h3>League of Legends: Mesa redonda LEC Finals</h3>
+              <p>Una mesa redonda con Knekro, Mellado, Kuentin y TH3ANTONIO repasando las últimas novedades sobre League of Legends, la LEC y las Summer Finals.</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsU2W-4Rpn-tS-T-QE20pqyE6bZfuR9gDSzg&amp;s" alt="Comic con Arnold Schwarzenegger">
+            <div class="card-body">
+              <h3>Arnold Schwarzenegger</h3>
+              <p>Arnold nos cuenta sus anecdotas, una emotiva charla y preguntas y respuestas.</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://i.ytimg.com/vi/snOLCw6ZMoc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&amp;rs=AOn4CLAaLttu6qCPPtBilphgE2tHzbqR8A">
+            <div class="card-body">
+              <h3>Avengers Doomsday</h3>
+              <p>Contenido exclusivo de la gran pelicula de Avengers Doomsday.</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2025/04/mario-kart-world-4310434.jpg?tf=3840x" alt="Zona de descanso con sombra">
+            <div class="card-body">
+              <h3>Competicion de Mario Kart World</h3>
+              <p>Torneo del juego Mario Kart World, con premios valorizados en más de 500$</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS (Flexbox) -->
+    <section class="section alt">
+      <div class="container">
+        <h2>Lo que dice la gente</h2>
+        <div class="testimonials">
+          <blockquote class="quote">
+            <p>“El mejor evento al que he ido. ¡Volvere!”</p>
+            <footer>— Andrés, 34</footer>
+          </blockquote>
+          <blockquote class="quote">
+            <p>“Increíble entorno y staff respetuoso.”</p>
+            <footer>— Dani, 23</footer>
+          </blockquote>
+          <blockquote class="quote">
+            <p>“Talleres muy prácticos y entretenidos.”</p>
+            <footer>— Laura, 32</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- TALLERES (lista con iconos) -->
+    <section id="talleres" class="section">
+      <div class="container">
+        <h2>Talleres</h2>
+        <ul class="feature-list">
+          <li>
+            <span class="feature-emoji" aria-hidden="true">🌱</span>
+            Creativos &amp; Algoritmos: Una nueva generación de oficios - La nueva convivencia: IA y audiovisual
+          </li>
+          <li>
+            <span class="feature-emoji" aria-hidden="true">🛠️</span>
+            Pintura de miniaturas con Ángel Giráldez
+          </li>
+          <li>
+            <span class="feature-emoji" aria-hidden="true">🎨</span>
+            Dibujo de superhéroes
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FORMULARIO -->
+    <section id="entradas" class="section alt">
+      <div class="container">
+        <h2>Entradas</h2>
+        <p class="section-desc">Rellena el formulario y te enviaremos las opciones disponibles.</p>
+
+        <form class="form" aria-labelledby="entradas">
+          <div class="form-row">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required="">
+          </div>
+
+          <div class="form-row">
+            <label for="email">Correo</label>
+            <input id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" required="">
+          </div>
+
+          <fieldset class="form-row">
+            <legend>Tipo de entrada</legend>
+            <label><input type="radio" name="tipo" value="dia" checked=""> Día</label>
+            <label><input type="radio" name="tipo" value="abono"> Abono (3 días)</label>
+          </fieldset>
+
+          <div class="form-row">
+            <label for="mensaje">Comentarios</label>
+            <textarea id="mensaje" name="mensaje" rows="4" placeholder="Dudas..."></textarea>
+          </div>
+
+          <button type="submit" class="btn">Enviar solicitud</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- PIE -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year">2025</span> EcoFest. Hecho con HTML &amp; CSS.</p>
+      <a href="#top" class="back-to-top">↑ Volver arriba</a>
+    </div>
+  </footer>
+
+  <!-- Script mínimo para el año (opcional, no se evalúa en CSS/HTML) -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+
+
+
+
+
+
+
+
+
+            <script>// Write JavaScript here</script>
+        
+    
+</body>

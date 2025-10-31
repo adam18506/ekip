@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+            <style>/* ====== ESTILOS GENERALES ====== */
+body {
+  font-family: 'Poppins', system-ui, sans-serif;
+  background: linear-gradient(135deg, #0b1b33, #2b0a0a);
+  color: #f8f8f8;
+  margin: 0;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* ====== TÍTULOS ====== */
+h1 {
+  font-size: 2.2rem;
+  text-align: center;
+  color: #ffbaba;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+/* ====== TABLA ====== */
+table {
+  border-collapse: collapse;
+  width: 400px;
+  background: #182b45;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-bottom: 25px;
+  color: #f1f5f9;
+}
+
+th {
+  background-color: #7a0010; /* rojo burdeos */
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+th, td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+td {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ====== BOTONES ====== */
+button {
+  background: linear-gradient(135deg, #7a0010, #0b1b33);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 15px;
+  cursor: pointer;
+  margin: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+button:hover {
+  transform: scale(1.07);
+  background: linear-gradient(135deg, #a10d20, #12284f);
+}
+
+/* ====== TARJETAS DE TAREAS ====== */
+.task {
+  background: rgba(255, 255, 255, 0.05);
+  border:
+</style>
+        </head>
+        <body>
+            
+
+
+<title>Tabla</title>
+
+
+
+<h1 class="lw">Elementos quimicos - muestra en Tabla</h1>
+<table>
+    <tbody><tr>
+        <th>nombre</th>
+        <td id="nombreVal"></td>
+    </tr>
+    <tr>
+        <th>Simbolo</th>
+        <td id="simboloVal"></td>
+    </tr>
+    <tr>
+        <th>Peso</th>
+        <td id="PesoVal"></td>
+    </tr>
+    <tr>
+        <th>numero</th>
+        <td id="numeroval"></td>
+    </tr>
+</tbody></table>
+
+
+<button onclick="co2()">CO²</button>
+<button onclick="o2()">O2</button>
+<button onclick="fe()">Fe</button>
+<!-- TAREA 1: CALCULADORA DE IMC -->
+    <div class="task">
+        <h2>1. Calculadora de Índice de Masa Corporal (IMC)</h2>
+        <p>
+            <label for="peso">Peso (kg):</label>
+            <input type="text" id="peso">
+        </p>
+        <p>
+            <label for="altura">Altura (m):</label>
+            <input type="text" id="altura">
+        </p>
+        <button onclick="calcularIMC()">Calcular el IMC</button>
+        
+        <div class="result">
+            <p id="resultadoIMC">Resultado del IMC: </p>
+            <p id="nivelIMC" class="level">Nivel: </p>
+        </div>
+    </div>
+
+    <!-- TAREA 2: GENERADOR DE TABLAS DE MULTIPLICAR -->
+    <div class="task">
+        <h2>2. Generador de Tablas de Multiplicar</h2>
+        <p>
+            <label for="numeroTabla">Número:</label>
+            <input type="text" id="numeroTabla">
+        </p>
+        <button onclick="generarTabla()">Tabla de multiplicar</button>
+        
+        <div class="result" id="resultadoTabla">
+            <!-- Aquí se mostrará la tabla de multiplicar -->
+        </div>
+    </div>
+
+    <!-- TAREA 3: CONVERSOR DE UNIDADES -->
+    <div class="task">
+        <h2>3. Conversor de Unidades (Pesetas a Euros)</h2>
+        <p>
+            <label for="cantidadPesetas">Cantidad en pesetas:</label>
+            <input type="text" id="cantidadPesetas">
+        </p>
+        <button onclick="convertirPesetasAEuros()">Convertir a Euros</button>
+        
+        <div class="result">
+            <p id="resultadoConversion">Resultado: </p>
+        </div>
+    </div>
+<script src="script.js&quot;"></script>
+
+
+            <script>// Write JavaScript here
+function co2(){
+    document.getElementById("nombreVal").textContent = "Dioxido de Carbono"
+    document.getElementById("simboloVal").textContent= "Co2"
+    document.getElementById("PesoVal").textContent= "44g/mol"
+    document.getElementById("numeroval").textContent= "428ppm"
+    
+  }
+function o2(){
+   document.getElementById("nombreVal").textContent = "Oxigeno"
+   document.getElementById("simboloVal").textContent = "O2"
+   document.getElementById("PesoVal").textContent = "16g/mol"
+   document.getElementById("numeroval").textContent = "8"
+}
+
+function fe(){
+
+    document.getElementById("nombreVal").textContent = "Hierro"
+    document.getElementById("simboloVal").textContent = "Fe"
+    document.getElementById("PesoVal").textContent = "55.84"
+    document.getElementById("numeroval").textContent = "26"
+}
+
+// TAREA 1: CALCULADORA DE IMC
+        function calcularIMC() {
+            // Obtener valores de entrada
+            const peso = parseFloat(document.getElementById('peso').value);
+            const altura = parseFloat(document.getElementById('altura').value);
+            
+            // Validar entrada
+            if (isNaN(peso) || isNaN(altura) || altura <= 0) {
+                alert("Por favor, introduce valores válidos para peso y altura.");
+                return;
+            }
+            
+            // Calcular IMC
+            const imc = peso / (altura * altura);
+            const imcRedondeado = Math.round(imc * 100) / 100;
+            
+            // Determinar nivel
+            let nivel = "";
+            let color = "";
+            
+            if (imc < 18.5) {
+                nivel = "Delgadez";
+                color = "blue";
+            } else if (imc < 25) {
+                nivel = "Peso normal";
+                color = "green";
+            } else if (imc < 30) {
+                nivel = "Sobrepeso";
+                color = "orange";
+            } else {
+                nivel = "Obesidad";
+                color = "red";
+            }
+            
+            // Mostrar resultados
+            document.getElementById('resultadoIMC').innerHTML = `Resultado del IMC: ${imcRedondeado}`;
+            document.getElementById('nivelIMC').innerHTML = `Nivel: ${nivel}`;
+            document.getElementById('nivelIMC').style.color = color;
+        }
+
+        // TAREA 2: GENERADOR DE TABLAS DE MULTIPLICAR
+        function generarTabla() {
+            // Obtener valor de entrada
+            const numero = parseInt(document.getElementById('numeroTabla').value);
+            
+            // Validar entrada
+            if (isNaN(numero)) {
+                alert("Por favor, introduce un número válido.");
+                return;
+            }
+            
+            // Generar tabla
+            let tablaHTML = "<h3>Tabla de multiplicar del " + numero + "</h3>";
+            for (let i = 0; i <= 9; i++) {
+                const resultado = numero * i;
+                tablaHTML += `<p>${numero} x ${i} = ${resultado}</p>`;
+            }
+            
+            // Mostrar tabla
+            document.getElementById('resultadoTabla').innerHTML = tablaHTML;
+        }
+
+        // TAREA 3: CONVERSOR DE UNIDADES (PESETAS A EUROS)
+        function convertirPesetasAEuros() {
+            // Obtener valor de entrada
+            const pesetas = parseFloat(document.getElementById('cantidadPesetas').value);
+            
+            // Validar entrada
+            if (isNaN(pesetas) || pesetas < 0) {
+                alert("Por favor, introduce una cantidad válida en pesetas.");
+                return;
+            }
+            
+            // Realizar conversión (1 euro = 166.386 pesetas)
+            const euros = pesetas / 166.386;
+            const eurosRedondeados = Math.round(euros * 100) / 100;
+            
+            // Mostrar resultado
+            document.getElementById('resultadoConversion').innerHTML = 
+                `Resultado: ${pesetas} pesetas = ${eurosRedondeados} euros`;
+        }</script>
+        
+    
+</body>
